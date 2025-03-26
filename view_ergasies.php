@@ -191,6 +191,19 @@
     </div>
 </footer>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+ <!-- Bootstrap JavaScript -->
+ <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
 
+<!-- Script την προσθηκη της κλασσης active ετσι ωστε να ειναι highlight το επιλεγμενο -->
+<script>
+ 
+   const links = document.querySelectorAll('.nav-link');
+   
+   links.forEach(link => {
+       if (link.href === window.location.href) {
+           link.classList.add('active'); 
+       }
+   });
+</script>
 
 </html>

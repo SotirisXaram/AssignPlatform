@@ -96,10 +96,13 @@
 
 
         <!-- Buttons  -->
+        <?php if (!isset($_SESSION['user_id'])) { ?>
         <div class="text-center">
             <a href="login.html" class="btn btn-primary btn-lg mx-2">Είσοδος</a>
             <a href="register.html" class="btn btn-success btn-lg mx-2">Εγγραφή</a>
         </div>
+        <?php } ?>
+        
     </div>
     <br>
     <br>

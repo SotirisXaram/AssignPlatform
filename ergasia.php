@@ -174,6 +174,20 @@
             <a href="pdf/terms.pdf" target="_blank">Όροι χρήσης</a> | <a href="pdf/privacy.pdf" target="_blank">Πολιτική Απορρήτου</a>
         </div>
     </footer>
+     <!-- Bootstrap JavaScript -->
+     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- Script την προσθηκη της κλασσης active ετσι ωστε να ειναι highlight το επιλεγμενο -->
+<script>
+ 
+   const links = document.querySelectorAll('.nav-link');
+   
+   links.forEach(link => {
+       if (link.href === window.location.href) {
+           link.classList.add('active'); 
+       }
+   });
+</script>
     
 </body>
 </html>
