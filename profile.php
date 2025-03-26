@@ -58,7 +58,7 @@
                         <a class="nav-link" href="index.php">Αρχική</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="portofolio.php">Portfolio Εργασιών</a>
+                        <a class="nav-link" href="portfolio.php">Portfolio Εργασιών</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="profile.php">Προφίλ</a>
