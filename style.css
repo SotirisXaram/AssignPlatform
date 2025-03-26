@@ -1,0 +1,77 @@
+/* Ορίζει το λογότυπο της σελίδας
+Πλάτος: 240px, Ύψος: 90px. 
+*/ 
+.navbar-brand img {
+    width: 240px;
+    height: 90px;
+}
+
+/* Διαμορφώνει το footer της σελίδας:
+Χρώμα φόντου: Σκούρο γκρι (#212529).
+Χρώμα κειμένου: Λευκό.
+Αποστάσεις (padding): 1 rem πάνω και κάτω, 0 δεξιά και αριστερά.
+Θέση (position): Fixed, δηλαδή το footer παραμένει πάντα στο κάτω 
+μέρος της σελίδας ανεξάρτητα από το scrolling.
+Ευρύτητα (width): Καλύπτει ολόκληρο το πλάτος της σελίδας.
+*/      
+.footer {
+    background-color: #212529;
+    color: white;
+    padding: 1rem 0;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+
+/*Διαμορφώνει την κύρια περιοχή περιεχομένου:
+Κάτω περιθώριο (margin-bottom): 80px, για να αφήσει χώρο στο τέλος του περιεχομένου.
+Οριζόντιο κέντρο (margin-left/right: auto): Το στοιχείο κεντράρεται στη σελίδα.
+*/        
+.main-content {
+    margin-bottom: 80px;
+    margin-left: auto;
+    margin-right: auto;
+}
+/* Περιορίζει το μέγιστο πλάτος της κύριας περιοχής περιεχομένου στα 900px. */
+.main-content2 {
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+}
+/* Περιορίζει το μέγιστο πλάτος της κύριας περιοχής περιεχομένου στα 600px. */	
+.main-content3 {
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Σχεδιάζει τη φόρμα του προφίλ:
+Χρώμα φόντου: Λευκό.
+Εσωτερικά περιθώρια (padding): 2 rem γύρω από το περιεχόμενο.
+Καμπύλες γωνίες (border-radius): 8px.
+Σκιά (box-shadow): Απαλή σκιά γύρω από το κουτί, με ημιδιαφανές 
+μαύρο (rgba(0, 0, 0, 0.1)). */
+.profile-form {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+/* Διαμορφώνει το βοηθητικό κείμενο στις φόρμες:
+Χρώμα κειμένου: Απαλό γκρι (#667).
+Μέγεθος γραμματοσειράς: 0.9 rem.
+Κάτω περιθώριο (margin-bottom): 1 rem.*/
+.form-text {
+    color: #667;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+}
+
+/* μήνυμα ergasia.php*/
+.custom-alert {
+    width: 30%;
+    margin: 20px auto;
+    /* Κεντράρει το alert οριζόντια */
+}
