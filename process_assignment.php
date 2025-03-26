@@ -38,10 +38,10 @@ if (move_uploaded_file($_FILES['assignment_image']['tmp_name'], $upload_path)) {
 $query = "INSERT INTO Assignment_Description (course_id, assignment_title, assignment_text, assignment_image) 
               VALUES ('$course_id', '$assignment_title', '$assignment_text', '$assignment_image')";
 
-if (mysqli_query($con, $query)) {
+if (mysqli_query($conn, $query)) {
     header("Location: create_ergasia.php?success=Η εργασία δημιουργήθηκε επιτυχώς!");
 } else {
-    header("Location: create_ergasia.php?error=Σφάλμα κατά την αποθήκευση: " . mysqli_error($con));
+    header("Location: create_ergasia.php?error=Σφάλμα κατά την αποθήκευση: " . mysqli_error($conn));
 }
 
 ?>
