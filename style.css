@@ -1,0 +1,85 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f7fa;
+    margin: 0;
+    padding: 0;
+}
+
+
+.logo{
+    height: 80px;
+    margin-left: 5px;
+    margin-top: 5px;
+
+    
+}
+
+ 
+/* General Form Styles */
+form {
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);  
+    padding: 30px;
+    max-width: 800px;
+    margin: 40px auto;
+}
+
+/* Form Labels */
+form label {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 10px;
+    display: inline-block;
+}
+
+/* Form Inputs, Selects, and Buttons */
+form input,
+form select,
+form button {
+    width: 100%;
+    padding: 12px 15px;
+    font-size: 1rem;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    background-color: #f9f9f9;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);  
+}
+
+/* Focus Effects on Inputs and Selects */
+form input:focus,
+form select:focus {
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+}
+
+/* Buttons */
+form button {
+    cursor: pointer;
+    font-weight: 600;
+    border: none;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+
+
+form button[type="button"]:nth-of-type(1) {
+    background-color: #007bff;
+    color: white;
+}
+
+form button[type="button"]:nth-of-type(1):hover {
+    background-color: #0056b3;
+}
+
+form button[type="button"]:nth-of-type(2) {
+    background-color: #dc3545;
+    color: white;
+}
+
+form button[type="button"]:nth-of-type(2):hover {
+    background-color: #c82333;
+}

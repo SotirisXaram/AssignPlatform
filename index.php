@@ -22,7 +22,7 @@
         <div class="container-fluid">
             <!-- Logo -->
             <a class="navbar-brand" href="index.php">
-                <img src="img/logo.png" alt="logo" style="height: 80px;">
+                <img src="img/logo.png" alt="logo" class="logo">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"

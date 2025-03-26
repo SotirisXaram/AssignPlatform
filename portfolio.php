@@ -20,7 +20,7 @@
     ?>
         <div class="container-fluid">
             <a class="navbar-brand" href="index.php">
-                <img src="img/logo.png" alt="logo" style="height: 80px;">
+                <img src="img/logo.png" alt="logo" class="logo">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -35,34 +35,34 @@
                         <a class="nav-link" href="index.php">Αρχική</a>
                     </li>
                     <?php
-                if (isset($_SESSION['role']) && $_SESSION['role'] == 'student') {
-                    echo '<li class="nav-item">
-                    <a class="nav-link active" href="portfolio.php">Portfolio Εργασιών</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="profile.php">Προφίλ</a>
-                    </li>';
-                } ?>
-                <?php if (isset($_SESSION['role']) && $_SESSION['role'] == 'professor') {
-                    echo '<li class="nav-item">
-                    <a class="nav-link" href="create_ergasia.php">Δημιουργία Εργασίας</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="view_ergasies.php">Προβολή Εργασιών</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="view_foititis.php">Εικόνα Φοιτητή</a>
-                    </li>';
-                } ?>
+                    if (isset($_SESSION['role']) && $_SESSION['role'] == 'student') {
+                        echo '<li class="nav-item">
+                        <a class="nav-link active" href="portfolio.php">Portfolio Εργασιών</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="profile.php">Προφίλ</a>
+                        </li>';
+                    } ?>
+                    <?php if (isset($_SESSION['role']) && $_SESSION['role'] == 'professor') {
+                        echo '<li class="nav-item">
+                        <a class="nav-link" href="create_ergasia.php">Δημιουργία Εργασίας</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="view_ergasies.php">Προβολή Εργασιών</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="view_foititis.php">Εικόνα Φοιτητή</a>
+                        </li>';
+                    } ?>
                 </ul>
                 <?php if (isset($_SESSION['user_id'])) {
-                echo '<button type="button" class="btn btn-danger btn-lg"><a href="logout.php" 
-						class="nav-link">Έξοδος</a></button>';
-            } else {
-                echo '<button type="button" class="btn btn-primary btn-lg"><a href="login.html" 
-						class="nav-link">Είσοδος</a></button>';
-            }
-            ?>
+                    echo '<button type="button" class="btn btn-danger btn-lg"><a href="logout.php" 
+                            class="nav-link">Έξοδος</a></button>';
+                } else {
+                    echo '<button type="button" class="btn btn-primary btn-lg"><a href="login.html" 
+                            class="nav-link">Είσοδος</a></button>';
+                }
+                ?>
                 
             </div>
         </div>
@@ -74,7 +74,7 @@
         <div class="mb-4 text-center">
             <p>Αν θες να υποβάλεις νέα εργασία κάνε κλικ εδώ:</p>
             <a href="ergasia.php"><button class="btn btn-success">Υποβολή Εργασίας</button></a>
-            <h3 class="py-3">Portofolio Εργασιών</h3>
+            <h3 class="py-3">Portfolio Εργασιών</h3>
         </div>
 
         <!-- Accordion -->
@@ -86,26 +86,23 @@
             $sql_courses = "SELECT * FROM courses";
             $result_courses = $conn->query($sql_courses);
 
-            //Ελέγχουμε αν το αποτέλεσμα του ερωτήματος περιέχει τουλάχιστον μία εγγραφή(ένα μάθημα)
             if ($result_courses->num_rows > 0) {
 
-                //Διατρέχουμε τα αποτελέσματα 
                 while ($course = $result_courses->fetch_assoc()) {
                     $course_id = $course['course_id'];
                     $course_title = $course['course_title'];
 
-                    // Ελέγχουμε αν ο χρήστης έχει υποβολές για αυτό το μάθημα
+                    // Fetch all submissions for the current user and course
                     $sql_submissions = "SELECT * FROM submitted_assignment  
                                       JOIN assignment_description  ON submitted_assignment.assignment_id = assignment_description.assignment_id 
                                       WHERE submitted_assignment.user_id = $user_id AND assignment_description.course_id = $course_id";
                     $result_submissions = $conn->query($sql_submissions);
 
-                    // Ελέγχουμε αν υπάρχουν διαθέσιμες εργασίες για αυτό το μάθημα
+                    // Fetch all assignments for the current course
                     $sql_assignments = "SELECT * FROM assignment_description WHERE course_id = $course_id";
                     $result_assignments = $conn->query($sql_assignments);
 
-                    // Εμφάνιση μαθημάτων που έχουν είτε υποβολές από τον φοιτητή είτε υπάρχουν διαθέσιμες εργασίες
-                    if ($result_submissions->num_rows > 0 || $result_assignments->num_rows > 0) {
+                    if ($result_assignments->num_rows > 0) {
                         ?>
                         <div class="accordion-item">
                             <h2 class="accordion-header">
@@ -118,56 +115,43 @@
                                 data-bs-parent="#coursesAccordion">
                                 <div class="accordion-body">
                                     <?php
-                                    // Εμφάνιση των υποβληθεισών εργασιών του φοιτητή
-                                    if ($result_submissions->num_rows > 0) {
-                                        while ($submission = $result_submissions->fetch_assoc()) {
-                                            ?>
-                                            <div class="card mb-3">
-                                                <div class="row g-0">
-                                                    <div class="col-md-2">
-                                                        <img src="<?php echo 'uploads/' . $submission['assignment_image']; ?>"
-                                                            class="img-fluid">
-                                                    </div>
-                                                    <div class="col-md-10">
-                                                        <div class="card-body">
-                                                            <h2 class="card-title"><?php echo $submission['assignment_title']; ?></h2>
-                                                            <h5>
-                                                                <p class="card-text"><?php echo $submission['submission_title']; ?></p>
-                                                            </h5>
-                                                            <p class="card-text"><?php echo $submission['submission_description']; ?></p>
-                                                            <a href="<?php echo $submission['submission_file']; ?>" target="_blank">
-                                                                <button class="btn btn-primary">Λήψη Εργασίας</button>
-                                                            </a>
+                                    // Display all assignments
+                                    while ($assignment = $result_assignments->fetch_assoc()) {
+                                        $is_submitted = false;
 
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <?php
+                                        // Check if the user has already submitted the assignment
+                                        if ($result_submissions->num_rows > 0) {
+                                            // Check if there is a submission for this assignment
+                                            while ($submission = $result_submissions->fetch_assoc()) {
+                                                if ($submission['assignment_id'] == $assignment['assignment_id']) {
+                                                    $is_submitted = true;
+                                                    break;
+                                                }
+                                            }
                                         }
-                                    } else {
-                                        // Εμφάνιση διαθέσιμων εργασιών που δεν έχουν υποβληθεί ακόμα
-                                        while ($assignment = $result_assignments->fetch_assoc()) {
-                                            ?>
-                                            <div class="card mb-3">
-                                                <div class="row g-0">
-                                                    <div class="col-md-2">
-                                                        <img src="<?php echo 'uploads/' . $assignment['assignment_image']; ?>"
-                                                            class="img-fluid">
-                                                    </div>
-                                                    <div class="col-md-10">
-                                                        <div class="card-body">
-                                                            <h2 class="card-title"><?php echo $assignment['assignment_title']; ?></h2>
-                                                            <p class="card-text"><?php echo $assignment['assignment_text']; ?></p>
+                                        ?>
+                                        <div class="card mb-3">
+                                            <div class="row g-0">
+                                                <div class="col-md-2">
+                                                    <img src="<?php echo 'uploads/' . $assignment['assignment_image']; ?>"
+                                                        class="img-fluid">
+                                                </div>
+                                                <div class="col-md-10">
+                                                    <div class="card-body">
+                                                        <h2 class="card-title"><?php echo $assignment['assignment_title']; ?></h2>
+                                                        <p class="card-text"><?php echo $assignment['assignment_text']; ?></p>
+                                                        <?php if ($is_submitted) { ?>
+                                                            <button class="btn btn-secondary" disabled>Υποβλήθηκε</button>
+                                                        <?php } else { ?>
                                                             <a href="ergasia.php?id=<?php echo $assignment['assignment_id']; ?>">
                                                                 <button class="btn btn-success">Υποβολή Εργασίας</button>
                                                             </a>
-                                                        </div>
+                                                        <?php } ?>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <?php
-                                        }
+                                        </div>
+                                        <?php
                                     }
                                     ?>
                                 </div>
@@ -181,9 +165,6 @@
             }
             ?>
         </div>
-
-
-
     </div>
     
     <br>

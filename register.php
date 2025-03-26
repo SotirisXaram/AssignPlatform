@@ -1,4 +1,5 @@
 <?php
+session_start();
 require 'config.php';
 
 $username = isset($_POST["username"]) ? trim($_POST["username"]) : null;
@@ -55,7 +56,12 @@ $stmt = $conn->prepare("INSERT INTO users (username, password, email, role) VALU
 $stmt->bind_param("ssss", $username, $hashed_password, $email, $role);
 
 if ($stmt->execute()) {
-    header("Location: dashboard.php");
+
+    $user_id = $stmt->insert_id;
+    $_SESSION['user_id'] = $user_id;
+    $_SESSION['username'] = $username;
+    $_SESSION['role'] = $role; 
+    header("Location: index.php");
     exit();
 } else {
     echo '<script>alert("Error during registration! Please try again."); window.location="register.html";</script>';

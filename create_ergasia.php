@@ -17,7 +17,7 @@
         ?>
         <div class="container-fluid">
             <a class="navbar-brand" href="index.php">
-                <img src="img/logo.png" alt="logo" style="height: 80px;">
+                <img src="img/logo.png" alt="logo" class="logo">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -66,7 +66,6 @@
     </header>
     
 
-    <!-- Ερώτηση 4 – Σελίδες για Καθηγητές  -->
     <div class="container main-content3 my-4">
         <h1 class="text-center mb-4">Δημιουργία Εργασίας</h1>
         <p class="text-center text-muted mb-4">Συμπληρώστε τα στοιχεία της νέας εργασίας.</p>
@@ -82,7 +81,6 @@
         }
         ?>
 
-        <!-- Ερώτηση 4 - Σελίδα «Δημιουργία Εκφώνησης Εργασίας» -->
         <div class="profile-form">
             <form action="process_assignment.php" method="POST" enctype="multipart/form-data">
                 <div class="mb-4">

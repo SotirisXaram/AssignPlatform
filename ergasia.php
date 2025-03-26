@@ -8,16 +8,15 @@
     <link rel="stylesheet" href="style.css">
 </head>
 
-<!-- Το επάνω μέρος κάθε σελίδας (γνωστό και ως επικεφαλίδα ή website header)  
-     Δημιουργεί μια σκούρα μπάρα πλοήγησης-->
+
 <header class="navbar navbar-expand-lg navbar-dark bg-dark">
     <?php
-    include('config.php'); //Σύνδεση με την βάση
-    session_start(); // Για να ξεκινήσουν τα sessions
+    include('config.php');  //Σύνδεση με την βάση
+    session_start(); 
     ?>
     <div class="container-fluid">
             <a class="navbar-brand" href="index.php">
-                <img src="img/logo.png" alt="logo" style="height: 80px;">
+                <img src="img/logo.png" alt="logo" class="logo">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -66,30 +65,24 @@
     </div>
 </header>
 
- <!-- Σελίδα «Υποβολή Εργασίας». -->
 <body>
     <?php
-    // id χρήστη
     $user_id = $_SESSION['user_id'];
 
     // Υποβολή εργασίας
     $submission_exists = false;
 
-    // Υποβολή δεδομένων
     $submission_data = null;
 
-    // Ελέγχω εάν ο χρήστης έχει υποβάλει την φόρμα
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $course_id = $_POST['course'];
         $assignment_id = $_POST['assignment'];
         $title = $_POST['title'];
         $description = $_POST['description'];
 
-        // Καταχώρηση αρχείου 
         $file_name = $_FILES['file']['name'];
         $file_path = "uploads/" . $file_name;
 
-        // Μετακίνηση του αρχείου στον φάκελο uploads/
         if (move_uploaded_file($_FILES['file']['tmp_name'], $file_path)) {
 
             // Ελέγχω εάν η υποβολή υπάρχει ήδη
@@ -97,10 +90,7 @@
                                WHERE user_id = '$user_id' 
                                AND assignment_id = '$assignment_id'";
             $check_result = mysqli_query($conn, $check_query);
-
-            // Ερώτηση 3 – Ενημέρωση υποβληθείσας εργασίας: Αν ο φοιτητής κάνει κάποια αλλαγή στα πεδία κειμένου ή/και 
-            // επιλέξει άλλο αρχείο προς υποβολή και, στη συνέχεια, υποβάλει τη φόρμα, τότε θα πρέπει να 
-            // ενημερώνεται (επικαιροποιείται) η υποβληθείσα εργασία με τα νέα στοιχεία.   
+ 
             if (mysqli_num_rows($check_result) > 0) {
                 $update_query = "UPDATE submitted_assignment 
                                     SET submission_title = '$title', 
@@ -123,10 +113,7 @@
                               </div>";
                 }
             } else {
-                // Ερώτηση 3 – Υποβολή νέας εργασίας: Ο φοιτητής θα πρέπει να είναι σε θέση να επιλέξει μάθημα και εργασία 
-                // και στη συνέχεια να συμπληρώσει τίτλο και σύντομη περιγραφή και να ανεβάσει το αρχείο (pdf) 
-                // με την εργασία του. Μετά την υποβολή, τα στοιχεία αυτά θα πρέπει να αποθηκεύονται επιτυχώς 
-                // στην πλευρά του server. 
+    
                 $insert_query = "INSERT INTO submitted_assignment 
                                     (user_id, assignment_id, submission_title, submission_description, submission_file) 
                                     VALUES 
@@ -155,45 +142,37 @@
 
     }
 
-    // Ελέγχουμε εάν έχει επιλεγεί ένα μάθημα
     if (isset($_GET['course_id'])) {
         $course_id = $_GET['course_id'];
     } else {
         $course_id = null;
     }
 
-    // Ελέγχουμε εάν έχει επιλεγεί μια εργασία
     if (isset($_GET['assignment_id'])) {
         $assignment_id = $_GET['assignment_id'];
     } else {
         $assignment_id = null;
     }
 
-    // Εάν έχουν επιλεγεί τόσο το μάθημα όσο και η εργασία, Ελέγχουμε για εργασίες
     if ($course_id && $assignment_id) {
         $submission_query = "SELECT * FROM submitted_assignment 
                             WHERE user_id = '$user_id' 
                             AND assignment_id = '$assignment_id'";
         $submission_result = mysqli_query($conn, $submission_query);
 
-        // Εάν έχει γίνει υποβολή για την εργασία
         if (mysqli_num_rows($submission_result) > 0) {
-            // Υποβολή εργασίας
             $submission_exists = true;
-            // Υποβολή δεδομένων
             $submission_data = mysqli_fetch_assoc($submission_result);
         }
     }
     ?>
 
 
-    <!-- Main content -->
     <div class="container main-content3 my-4">
         <h1 class="text-center mb-4">Υποβολή Εργασίας</h1>
         <p class="text-center text-muted mb-4">Υποβάλετε μια νέα εργασία, αφού πρώτα επιλέξετε το σωστό μάθημα.</p>
         <div class="profile-form">
             <form method="POST" enctype="multipart/form-data">
-                <!-- Επιλογή μαθήματος -->
                 <div class="mb-3">
                     <b><label for="course" class="form-label">Μάθημα</label></b>
                     <select class="form-select" id="course" name="course" required onchange="updateAssignments()">
@@ -208,7 +187,6 @@
                     </select>
                 </div>
 
-                <!-- Επιλογή εργασίας -->
                 <div class="mb-3">
                     <b><label for="assignment" class="form-label">Εργασία</label></b>
                     <select class="form-select" id="assignment" name="assignment" required onchange="checkSubmission()">
@@ -225,7 +203,6 @@
                     </select>
                 </div>
 
-                <!-- Εισαγωγή τίτλου εργασίας -->
                 <div class="mb-3">
                     <b><label for="title" class="form-label">Τίτλος Εργασίας</label></b>
                     <input type="text" class="form-control" id="title" name="title"
@@ -238,7 +215,6 @@
                         ?>">
                 </div>
 
-                <!-- Περιοχή κειμένου περιγραφής εργασίας -->
                 <div class="mb-3">
                     <b><label for="description" class="form-label">Περιγραφή</label></b>
                     <textarea class="form-control" id="description" name="description" rows="4"
@@ -251,7 +227,6 @@
                         ?></textarea>
                 </div>
 
-                <!-- Αρχείο Εργασίας (PDF) -->
                 <div class="mb-3">
                     <b><label for="file" class="form-label">Αρχείο Εργασίας (PDF)</label></b>
                     <input type="file" class="form-control" id="file" name="file" accept=".pdf" required>
@@ -259,7 +234,6 @@
 
                 <div class="d-flex">
                     <button type="submit" class="btn btn-primary px-4">Υποβολή</button>
-                    <!--  δίπλα στο κουμπί «Υποβολή» θα εμφανίζεται και ένα κουμπί «Λήψη Υποβληθείσας Εργασίας» -->
                     <?php if ($submission_exists): ?>
                         <a href="<?php echo $submission_data['submission_file']; ?>"
                             class="btn btn-success px-4 ms-3" target="_blank">
