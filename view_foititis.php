@@ -120,6 +120,16 @@
                 echo '<div class="card-header bg-primary text-white">';
                 echo '<h3>Προφίλ Φοιτητή</h3>';
                 echo '</div>';
+
+               echo '<div class="d-flex gap-2">
+				<a href="export_student_profile.php?student_id=' . $student_id . '" class="btn btn-primary btn-sm">
+				<i class="bi bi-file-earmark-code"></i> Εξαγωγή XML</a>
+				<a href="view_student_profile.php?student_id=' . $student_id . '" target="_blank" 
+				 class="btn btn-outline-secondary btn-sm">
+				<i class="bi bi-eye"></i> Προβολή XML</a>
+				</div>';
+
+
                 echo '<div class="card-body">';
                 echo '<h4 class="card-title">' . $profile['full_name'] . '</h4>';
                 echo '<p class="card-text"><strong>Email:</strong> ' . $profile['email'] . '</p>';
