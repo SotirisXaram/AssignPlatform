@@ -105,7 +105,6 @@ echo "<h3>Σφάλμα: Το XML έγγραφο δεν είναι έγκυρο</
 echo "</div>";
 } else {
 $filename = 'student_' . $profile['full_name'] . '_profile.xml';
-// Ορισμός header για κατέβασμα αρχείου
 header('Content-Type: application/xml');
 header('Content-Disposition: attachment; filename="' . $filename . '"');
 echo $xml_output;
