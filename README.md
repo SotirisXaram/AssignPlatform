@@ -15,7 +15,7 @@ AssignPlatform is an interactive **web application** designed for academic insti
 
 ## **Overview**
 
-AssignPlatform simplifies the assignment distribution process for professors and enhances the submission workflow for students. The system is built using **PHP** and **MySQL**, providing an efficient and secure environment for academic work management.
+AssignPlatform simplifies the assignment distribution process for professors and enhances the submission workflow for students. The system is built using **PHP** , **MySQL**, **XSL** , **XML** providing an efficient and secure environment for academic work management.
 
 **Key functionalities include:**
 - Professors can create, edit, and assign tasks.
